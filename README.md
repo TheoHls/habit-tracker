@@ -1,32 +1,55 @@
-# React + TypeScript + Vite
+# Habitudes
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Petite app de suivi d'habitudes : ajoute tes habitudes, coche les jours où tu les fais, suis ta série 🔥.
 
-Currently, two official plugins are available:
+![CI](../../actions/workflows/ci.yml/badge.svg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Fonctionnalités
 
-## React Compiler
+- Ajouter / supprimer des habitudes
+- Cocher les 7 derniers jours
+- Série en cours et record par habitude
+- Compteur du jour
+- Données sauvegardées en local (localStorage), aucun compte
+- Mode sombre automatique, responsive mobile
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the Oxlint configuration
+React 19 · TypeScript · Vite · Vitest + Testing Library · oxlint · Prettier · GitHub Actions
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Démarrer
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Scripts
+
+| Commande         | Rôle                       |
+| ---------------- | -------------------------- |
+| `npm run dev`    | Serveur de dev             |
+| `npm test`       | Tests                      |
+| `npm run lint`   | Lint                       |
+| `npm run format` | Formatage                  |
+| `npm run build`  | Build de prod dans `dist/` |
+
+## Structure
+
+```
+src/
+  lib/habits.ts        logique pure (séries, dates) + tests
+  hooks/useHabits.ts   état + persistance localStorage
+  components/          HabitForm, HabitRow
+  App.tsx              écran principal (+ test d'intégration)
+```
+
+## CI / déploiement
+
+- `ci.yml` : format, lint, tests, build à chaque push et PR
+- `deploy.yml` : déploie sur GitHub Pages à chaque push sur `main`
+  (activer dans _Settings → Pages → Source : GitHub Actions_)
+
+## Licence
+
+MIT
