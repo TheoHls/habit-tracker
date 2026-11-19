@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { currentStreak, longestStreak, toDateKey, type Habit } from '../lib/habits'
 
 interface Props {
@@ -13,6 +14,7 @@ const dayFmt = new Intl.DateTimeFormat('fr-FR', { weekday: 'short', day: 'numeri
 export function HabitRow({ habit, days, today, onToggle, onRemove }: Props) {
   const streak = currentStreak(habit, today)
   const best = longestStreak(habit)
+  const [confirming, setConfirming] = useState(false)
 
   return (
     <li className="habit">
@@ -22,13 +24,14 @@ export function HabitRow({ habit, days, today, onToggle, onRemove }: Props) {
           🔥 {streak} j
         </span>
         <button
-          className="remove"
-          aria-label={`Supprimer ${habit.name}`}
-          onClick={() => {
-            if (confirm(`Supprimer « ${habit.name} » ?`)) onRemove(habit.id)
-          }}
+          className={`remove${confirming ? ' confirm' : ''}`}
+          aria-label={
+            confirming ? `Confirmer la suppression de ${habit.name}` : `Supprimer ${habit.name}`
+          }
+          onClick={() => (confirming ? onRemove(habit.id) : setConfirming(true))}
+          onBlur={() => setConfirming(false)}
         >
-          ✕
+          {confirming ? 'Supprimer ?' : '✕'}
         </button>
       </div>
       <div className="days">

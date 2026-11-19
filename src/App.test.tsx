@@ -41,3 +41,20 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: 'Ajouter' })).toBeDisabled()
   })
 })
+
+describe('App removal', () => {
+  beforeEach(() => localStorage.clear())
+
+  it('asks for confirmation before removing a habit', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.type(screen.getByLabelText('Nouvelle habitude'), 'Sport')
+    await user.click(screen.getByRole('button', { name: 'Ajouter' }))
+
+    await user.click(screen.getByRole('button', { name: 'Supprimer Sport' }))
+    expect(screen.getByRole('heading', { name: 'Sport' })).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Confirmer la suppression de Sport' }))
+    expect(screen.queryByRole('heading', { name: 'Sport' })).not.toBeInTheDocument()
+  })
+})
