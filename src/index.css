@@ -194,3 +194,49 @@ h1 {
   font-size: 0.8rem;
   font-weight: 600;
 }
+
+.sync {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: -8px 0 16px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.sync .link {
+  border: 0;
+  background: none;
+  padding: 6px 0;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+}
+.sync-form {
+  justify-content: flex-start;
+}
+.sync-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+}
+.sync-form button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sync-error {
+  width: 100%;
+  margin: 0 0 12px;
+  color: #d64545;
+  font-size: 0.85rem;
+}

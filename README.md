@@ -10,7 +10,8 @@ Petite app de suivi d'habitudes : ajoute tes habitudes, coche les jours où tu l
 - Cocher les 7 derniers jours
 - Série en cours et record par habitude
 - Compteur du jour
-- Données sauvegardées en local (localStorage), aucun compte
+- Données sauvegardées sur l'appareil, sans compte
+- Synchro optionnelle entre appareils via Supabase (connexion par lien magique)
 - Mode sombre automatique, responsive mobile
 
 ## Stack
@@ -23,6 +24,15 @@ React 19 · TypeScript · Vite · Vitest + Testing Library · oxlint · Prettier
 npm install
 npm run dev
 ```
+
+## Synchro Supabase (optionnel)
+
+1. Crée un projet sur [supabase.com](https://supabase.com)
+2. SQL Editor : colle et exécute `supabase/schema.sql`
+3. Authentication → URL Configuration : mets l'URL de l'app en _Site URL_
+4. Copie `.env.example` en `.env.local` (dev) ou `.env.production` (build) avec l'URL et la clé publique
+
+Sans ces variables, l'app fonctionne en mode local uniquement.
 
 ## Scripts
 

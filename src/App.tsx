@@ -1,13 +1,16 @@
 import { useMemo, useState } from 'react'
 import { HabitForm } from './components/HabitForm'
 import { HabitRow } from './components/HabitRow'
+import { SyncBar } from './components/SyncBar'
 import { useHabits } from './hooks/useHabits'
+import { useSession } from './hooks/useSession'
 import { lastDays, toDateKey } from './lib/habits'
 
 const DAYS_SHOWN = 7
 
 export default function App() {
-  const { habits, add, remove, toggle } = useHabits()
+  const { session } = useSession()
+  const { habits, add, remove, toggle, error } = useHabits(session?.user.id ?? null)
   const [today] = useState(() => new Date())
   const days = useMemo(() => lastDays(today, DAYS_SHOWN), [today])
   const todayKey = toDateKey(today)
@@ -23,6 +26,13 @@ export default function App() {
           </p>
         )}
       </header>
+
+      <SyncBar session={session} />
+      {error && (
+        <p className="sync-error" role="alert">
+          {error}
+        </p>
+      )}
 
       <HabitForm onAdd={add} />
 
